@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "629347861051",
+    "firebase_url": "https://one-time-password-e5e1d.firebaseio.com",
+    "project_id": "one-time-password-e5e1d",
+    "storage_bucket": "one-time-password-e5e1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629347861051:android:eefaf2596fe7c1aa8cd21e",
+        "android_client_info": {
+          "package_name": "com.thetimurista.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "629347861051-ecug11mc1eduk8sth8itlkepc7q28ojp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBch6Px-eAlwXnM2kHN103uBZo1_qNp4UU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "629347861051-ht39jkv75no7ssnspeu9edf132fvqt1c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
