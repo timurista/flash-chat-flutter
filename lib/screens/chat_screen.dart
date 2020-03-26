@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatScreen extends StatefulWidget {
   static const String id = 'chat';
@@ -12,6 +13,8 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final _auth = FirebaseAuth.instance;
+  final _firestore = Firestore.instance;
+  String messageText;
   FirebaseUser loggedInUser;
 
   void getCurrentUser() async {
@@ -28,10 +31,27 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
+  void getMessages() async {
+    final messages = await _firestore.collection("messages").getDocuments();
+    for (var message in messages.documents) {
+      print(message.data);
+    }
+  }
+
+  void messagesStream() async {
+    await for (var snapshot in _firestore.collection("messages").snapshots()) {
+      for (var message in snapshot.documents) {
+        print(message.data);
+      }
+    }
+    ;
+  }
+
   @override
   void initState() {
     super.initState();
     getCurrentUser();
+    messagesStream();
   }
 
   @override
@@ -63,14 +83,19 @@ class _ChatScreenState extends State<ChatScreen> {
                   Expanded(
                     child: TextField(
                       onChanged: (value) {
-                        //Do something with the user input.
+                        setState(() {
+                          messageText = value;
+                        });
                       },
                       decoration: kMessageTextFieldDecoration,
                     ),
                   ),
                   FlatButton(
                     onPressed: () {
-                      //Implement send functionality.
+                      _firestore.collection("messages").add({
+                        "sender": loggedInUser.email,
+                        "text": messageText,
+                      });
                     },
                     child: Text(
                       'Send',
